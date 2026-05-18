@@ -8,7 +8,9 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "build:prod": "SITE_URL=https://yosh.my astro build",
     "preview": "astro preview",
+    "deploy": "npm run build:prod && CLOUDFLARE_ACCOUNT_ID=d52d9daab552d420a5784ccd36b52435 wrangler pages deploy dist --project-name yosh --branch main --commit-dirty=true",
     "astro": "astro"
   },
   "dependencies": {
