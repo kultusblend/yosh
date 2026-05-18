@@ -1,0 +1,205 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_TITLE, SITE_NAME, PROFILE } from '../consts';
+import { languages, competencies } from '../data/experience';
+---
+
+<BaseLayout
+	title={`About · ${SITE_TITLE}`}
+	description={`About ${SITE_NAME}. Senior marketing and corporate communications consultant based in Kajang.`}
+	breadcrumbs={[
+		{ name: 'Home', url: '/' },
+		{ name: 'About', url: '/about/' },
+	]}
+>
+	<section class="container hero">
+		<div class="hero-top">
+			<span class="section-index"><span class="num">01</span> ABOUT</span>
+			<span>{PROFILE.location} · MY</span>
+		</div>
+		<h1>An operator across publishing, media, and federal advisory.</h1>
+	</section>
+
+	<section class="container section">
+		<div class="grid-2 bio-grid">
+			<div class="bio-body">
+				<p class="lede">
+					Saya Noor Azree, 15 tahun dalam marketing dan corporate communications across Malaysia&rsquo;s publishing, media, federal advisory, dan education sectors. Sekarang based di Kajang, Selangor.
+				</p>
+				<p>
+					Kerja saya silang antara <strong>strategic marketing, digital campaigns, media relations, dan crisis communications</strong>. Paling intens recently sebagai advisor at federal ministerial press secretary level, handle real-time sentiment monitoring dan online crisis comms semasa isu publik high-profile.
+				</p>
+				<p>
+					Asal saya dari publishing. Lima tahun pertama career uruskan lebih 1,200 digital titles untuk PTS Media Group, lepas tu bergerak ke training dan consulting. Sekarang juga sedang sambung Master in Publishing Studies di Universiti Malaya.
+				</p>
+				<p>
+					Saya juga regular trainer untuk government agencies, universities, dan corporate clients pada topik <strong>generative AI in marketing, content strategy, dan social media</strong>. Pernah cakap pada Asian Festival of Children&rsquo;s Content di Singapore (2013), dan published satu buku, <em>Mudahnya Bisnes dengan Forum Online</em> (PTS Profesional, 2011).
+				</p>
+				<p>
+					Bila ada masa, saya bina indie tools. Sekarang sedang ship <a href="/projects/">osaji</a>, Telegram bot untuk track kalori, untuk kegunaan sendiri. Site ni jadi tempat untuk simpan kerja, projek, dan rekod latihan.
+				</p>
+			</div>
+			<aside class="bio-side">
+				<div class="panel">
+					<p class="label label-accent">∎ Quick facts</p>
+					<dl class="kv">
+						<dt>Location</dt>
+						<dd>{PROFILE.location}</dd>
+						<dt>Role</dt>
+						<dd>{PROFILE.jobTitle}</dd>
+						<dt>Email</dt>
+						<dd><a href={`mailto:${PROFILE.email}`}>{PROFILE.email}</a></dd>
+						<dt>Phone</dt>
+						<dd><a href={`tel:${PROFILE.phone.replace(/\s/g, '')}`}>{PROFILE.phone}</a></dd>
+					</dl>
+				</div>
+
+				<div class="panel">
+					<p class="label">Languages</p>
+					<ul class="list-clean lang-list">
+						{languages.map((l) => (
+							<li>
+								<span class="lang-name">{l.name}</span>
+								<span class="lang-score">Spoken {l.spoken}/10 · Written {l.written}/10</span>
+							</li>
+						))}
+					</ul>
+				</div>
+			</aside>
+		</div>
+	</section>
+
+	<section class="container section">
+		<header class="section-head">
+			<h2>Core competencies</h2>
+			<span class="section-index"><span class="num">02</span> SCOPE</span>
+		</header>
+		<ul class="comp-grid">
+			{competencies.map((c, i) => (
+				<li>
+					<span class="comp-index">{String(i + 1).padStart(2, '0')}</span>
+					<span>{c}</span>
+				</li>
+			))}
+		</ul>
+	</section>
+
+	<section class="container section-tight">
+		<div class="cta-panel">
+			<div>
+				<p class="label label-accent">∎ NEXT</p>
+				<h2>See the full record</h2>
+			</div>
+			<div class="cluster">
+				<a class="btn" href="/cv/">View CV →</a>
+				<a class="btn btn-primary" href="/contact/">Contact</a>
+			</div>
+		</div>
+	</section>
+</BaseLayout>
+
+<style>
+	.hero-top {
+		display: flex;
+		justify-content: space-between;
+		font-family: var(--font-mono);
+		font-size: var(--text-xs);
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--ink-500);
+		margin-bottom: 2rem;
+	}
+	.hero h1 { font-size: clamp(2rem, 5vw, 3.25rem); max-width: 22ch; }
+
+	.bio-grid { align-items: start; }
+	.bio-body p { color: var(--ink-700); margin-bottom: 1.1rem; font-size: var(--text-base); line-height: 1.7; max-width: 60ch; }
+	.bio-body a { color: var(--ink-900); border-bottom: 1px solid var(--accent); }
+	.bio-body a:hover { color: var(--accent); }
+
+	.bio-side { display: flex; flex-direction: column; gap: 1rem; position: sticky; top: 5rem; }
+	.kv {
+		display: grid;
+		grid-template-columns: max-content 1fr;
+		gap: 0.5rem 1rem;
+		margin: 0.75rem 0 0;
+	}
+	.kv dt {
+		font-family: var(--font-mono);
+		font-size: var(--text-xs);
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--ink-500);
+	}
+	.kv dd {
+		margin: 0;
+		font-size: var(--text-sm);
+		color: var(--ink-900);
+	}
+	.kv dd a { color: var(--ink-900); }
+	.kv dd a:hover { color: var(--accent); }
+
+	.lang-list li {
+		display: flex;
+		justify-content: space-between;
+		gap: 0.5rem;
+		border-bottom: 1px solid var(--rule);
+		padding: 0.4rem 0;
+		font-size: var(--text-sm);
+	}
+	.lang-list li:last-child { border-bottom: 0; }
+	.lang-name { color: var(--ink-900); font-weight: 500; }
+	.lang-score {
+		font-family: var(--font-mono);
+		font-size: var(--text-xs);
+		color: var(--ink-500);
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+	}
+
+	.comp-grid {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 0;
+		border-top: 1px solid var(--ink-900);
+	}
+	.comp-grid li {
+		display: flex;
+		gap: 0.85rem;
+		align-items: baseline;
+		padding: 1rem 0.5rem;
+		border-bottom: 1px solid var(--rule);
+		font-size: var(--text-sm);
+		color: var(--ink-900);
+	}
+	.comp-grid li:nth-child(odd) { border-right: 1px solid var(--rule); padding-right: 1.25rem; }
+	.comp-index {
+		font-family: var(--font-mono);
+		font-size: var(--text-xs);
+		color: var(--accent);
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+	}
+	@media (max-width: 820px) {
+		.comp-grid { grid-template-columns: 1fr; }
+		.comp-grid li:nth-child(odd) { border-right: 0; padding-right: 0.5rem; }
+		.bio-side { position: static; }
+	}
+
+	.cta-panel {
+		background: var(--ink-900);
+		color: var(--surface);
+		padding: 2rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 2rem;
+	}
+	.cta-panel h2 { color: var(--surface); margin: 0.4rem 0 0; font-size: var(--text-xl); }
+	.cta-panel .label-accent { color: var(--accent); }
+	@media (max-width: 760px) {
+		.cta-panel { flex-direction: column; align-items: flex-start; }
+	}
+</style>

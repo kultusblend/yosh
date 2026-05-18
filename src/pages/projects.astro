@@ -1,0 +1,145 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_TITLE, PROFILE } from '../consts';
+import { projects } from '../data/projects';
+
+const statusClass = (s: string) => {
+	if (s === 'LIVE') return 'pill-live';
+	if (s === 'IN DEV') return 'pill-dev';
+	if (s === 'SHIPPED') return 'pill-shipped';
+	return 'pill-static';
+};
+---
+
+<BaseLayout
+	title={`Projects · ${SITE_TITLE}`}
+	description="Side projects and indie tools built by Noor Azree Hanifiah."
+	breadcrumbs={[
+		{ name: 'Home', url: '/' },
+		{ name: 'Projects', url: '/projects/' },
+	]}
+>
+	<section class="container hero">
+		<div class="hero-top">
+			<span class="section-index"><span class="num">PR</span> PROJECTS</span>
+			<span>{PROFILE.location} · MY</span>
+		</div>
+		<h1>Side projects.</h1>
+		<p class="lede">Indie tools, mostly built for personal use. Light scope, fast iteration, no roadmap promises.</p>
+	</section>
+
+	<section class="container section">
+		<header class="section-head">
+			<h2>Active builds</h2>
+			<span class="section-index"><span class="num">01</span> {projects.length} ITEM{projects.length === 1 ? '' : 'S'}</span>
+		</header>
+
+		<div class="rows projects-rows">
+			{projects.map((p) => (
+				<article class="row project-row">
+					<span class="row-index">[{p.id}]</span>
+					<div class="row-body">
+						<h3>{p.name}</h3>
+						<div class="meta">
+							<span>{p.tagline}</span>
+							{p.version && <span>{p.version}</span>}
+							<span>{p.year}</span>
+						</div>
+						<p>{p.description}</p>
+						{p.bullets && (
+							<ul>
+								{p.bullets.map((b) => <li>{b}</li>)}
+							</ul>
+						)}
+						{p.stack && (
+							<div class="stack-row">
+								<span class="label">Stack</span>
+								<ul class="list-pipe">
+									{p.stack.map((t) => <li>· {t}</li>)}
+								</ul>
+							</div>
+						)}
+					</div>
+					<div class="row-side">
+						<span class={`pill ${statusClass(p.status)}`}>{p.status}</span>
+						{p.statusNote && <span class="status-note">{p.statusNote}</span>}
+						{p.link && p.link.href !== '#' && (
+							<a class="btn btn-ghost" href={p.link.href}>{p.link.label} →</a>
+						)}
+						{p.link && p.link.href === '#' && (
+							<span class="status-note">link coming soon</span>
+						)}
+					</div>
+				</article>
+			))}
+		</div>
+	</section>
+
+	<section class="container section">
+		<header class="section-head">
+			<h2>Backlog</h2>
+			<span class="section-index"><span class="num">02</span> IDEAS</span>
+		</header>
+		<p class="muted">
+			Nothing committed. Tempat untuk simpan idea-idea kecil yang belum start build. Boleh letakkan sini bila dah ready untuk publik.
+		</p>
+	</section>
+
+	<section class="container section-tight">
+		<div class="panel panel-accent collab">
+			<div>
+				<p class="label label-accent">∎ COLLAB</p>
+				<h2>Got an idea worth shipping?</h2>
+				<p>Open to small collaborations, especially indie tools that solve a real personal workflow.</p>
+			</div>
+			<a class="btn btn-primary" href="/contact/">Tell me about it →</a>
+		</div>
+	</section>
+</BaseLayout>
+
+<style>
+	.hero-top {
+		display: flex;
+		justify-content: space-between;
+		font-family: var(--font-mono);
+		font-size: var(--text-xs);
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--ink-500);
+		margin-bottom: 2rem;
+	}
+	.hero h1 { font-size: clamp(2.25rem, 6vw, 4rem); }
+	.hero .lede { max-width: 46ch; }
+
+	.projects-rows .row { align-items: stretch; }
+	.project-row .row-body p { color: var(--ink-700); }
+	.project-row .row-body ul { color: var(--ink-700); }
+	.project-row .stack-row {
+		display: flex;
+		gap: 0.75rem;
+		align-items: baseline;
+		margin-top: 0.75rem;
+		flex-wrap: wrap;
+	}
+
+	.row-side .status-note {
+		font-family: var(--font-mono);
+		font-size: var(--text-xs);
+		color: var(--ink-500);
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+	}
+
+	.collab {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 2rem;
+	}
+	.collab h2 { margin: 0.4rem 0 0.5rem; font-size: var(--text-xl); }
+	.collab p { color: var(--ink-700); max-width: 42ch; margin: 0; }
+	.collab .btn-primary { white-space: nowrap; }
+	@media (max-width: 760px) {
+		.collab { flex-direction: column; align-items: flex-start; }
+	}
+</style>

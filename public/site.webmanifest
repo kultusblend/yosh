@@ -1,0 +1,16 @@
+{
+  "name": "yosh.my — Noor Azree Hanifiah",
+  "short_name": "yosh.my",
+  "description": "Personal site of Noor Azree Hanifiah.",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
+    }
+  ],
+  "theme_color": "#e63946",
+  "background_color": "#fafaf9",
+  "display": "standalone",
+  "lang": "ms-MY"
+}

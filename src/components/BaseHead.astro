@@ -1,0 +1,127 @@
+---
+import '@fontsource-variable/ibm-plex-sans';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
+import {
+	SITE_TITLE,
+	SITE_DESCRIPTION,
+	SITE_LOCALE,
+	PROFILE,
+	SOCIAL,
+} from '../consts';
+
+const DEFAULT_OG_IMAGE = '/og-default.png';
+
+interface BreadcrumbItem {
+	name: string;
+	url: string;
+}
+
+interface Props {
+	title: string;
+	description?: string;
+	image?: string;
+	breadcrumbs?: BreadcrumbItem[];
+}
+
+const {
+	title,
+	description = SITE_DESCRIPTION,
+	image = DEFAULT_OG_IMAGE,
+	breadcrumbs = [],
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const imageURL = new URL(image, Astro.url).toString();
+const siteOrigin = Astro.site?.toString() ?? '';
+
+const personSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'Person',
+	name: PROFILE.fullName,
+	givenName: 'Noor Azree',
+	familyName: 'Hanifiah',
+	url: siteOrigin,
+	jobTitle: PROFILE.jobTitle,
+	email: PROFILE.email,
+	nationality: PROFILE.country,
+	address: {
+		'@type': 'PostalAddress',
+		addressLocality: 'Kajang',
+		addressRegion: 'Selangor',
+		addressCountry: 'MY',
+	},
+	worksFor: [
+		{ '@type': 'Organization', name: 'Penerbitan Kuras Buku' },
+	],
+	alumniOf: [
+		{ '@type': 'CollegeOrUniversity', name: 'Universiti Malaya' },
+		{ '@type': 'CollegeOrUniversity', name: 'International Islamic University Malaysia' },
+	],
+	sameAs: Object.values(SOCIAL).filter((v) => v && v.startsWith('http')),
+};
+
+const websiteSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'WebSite',
+	name: SITE_TITLE,
+	description: SITE_DESCRIPTION,
+	url: siteOrigin,
+	inLanguage: 'ms-MY',
+	publisher: { '@type': 'Person', name: PROFILE.fullName, url: siteOrigin },
+};
+
+const breadcrumbSchema =
+	breadcrumbs.length > 0
+		? {
+				'@context': 'https://schema.org',
+				'@type': 'BreadcrumbList',
+				itemListElement: breadcrumbs.map((b, i) => ({
+					'@type': 'ListItem',
+					position: i + 1,
+					name: b.name,
+					item: new URL(b.url, Astro.site).toString(),
+				})),
+			}
+		: null;
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="manifest" href="/site.webmanifest" />
+<meta name="theme-color" content="#e63946" />
+<meta name="apple-mobile-web-app-title" content={SITE_TITLE} />
+<link rel="sitemap" href="/sitemap-index.xml" />
+<meta name="generator" content={Astro.generator} />
+
+<ClientRouter />
+
+<link rel="canonical" href={canonicalURL} />
+
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+<meta name="author" content={PROFILE.fullName} />
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content={Astro.url} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={imageURL} />
+<meta property="og:site_name" content={SITE_TITLE} />
+<meta property="og:locale" content={SITE_LOCALE} />
+
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={Astro.url} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={imageURL} />
+
+<script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+{breadcrumbSchema && (
+	<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+)}

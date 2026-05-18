@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_TITLE } from '../consts';
+---
+
+<BaseLayout title={`404 · ${SITE_TITLE}`} description="Page not found.">
+	<section class="container nf">
+		<span class="section-index"><span class="num">ERR</span> 404 / NOT FOUND</span>
+		<h1>Halaman tak jumpa.</h1>
+		<p class="lede">Link tu mungkin dah pindah, atau memang tak pernah wujud. Cuba balik ke index.</p>
+		<div class="cluster">
+			<a class="btn btn-primary" href="/">Index</a>
+			<a class="btn" href="/cv/">CV</a>
+			<a class="btn" href="/projects/">Projects</a>
+		</div>
+	</section>
+</BaseLayout>
+
+<style>
+	.nf {
+		min-height: 60vh;
+		padding-top: clamp(3rem, 8vw, 6rem);
+		padding-bottom: 4rem;
+	}
+	.nf h1 {
+		font-size: clamp(3rem, 10vw, 6rem);
+		margin: 1rem 0;
+	}
+	.nf .lede { max-width: 40ch; margin-bottom: 1.5rem; }
+	.section-index .num { color: var(--accent); }
+</style>

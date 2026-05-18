@@ -1,0 +1,369 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_TITLE, SITE_NAME, PROFILE } from '../consts';
+import {
+	experience,
+	workshops,
+	education,
+	certifications,
+	speaking,
+	publications,
+	competencies,
+	proficiencies,
+	languages,
+} from '../data/experience';
+---
+
+<BaseLayout
+	title={`CV · ${SITE_TITLE}`}
+	description={`Full CV of ${SITE_NAME}. Senior marketing and corporate communications consultant.`}
+	breadcrumbs={[
+		{ name: 'Home', url: '/' },
+		{ name: 'CV', url: '/cv/' },
+	]}
+>
+	<section class="container hero">
+		<div class="hero-top">
+			<span class="section-index"><span class="num">CV</span> CURRICULUM VITAE</span>
+			<span>{PROFILE.location} · MY</span>
+		</div>
+		<h1>{PROFILE.fullName}</h1>
+		<p class="lede cv-summary">{PROFILE.jobTitle}. 15 years across publishing, media, government advisory, and education in Malaysia.</p>
+		<div class="cv-meta">
+			<span><span class="muted">EMAIL</span> <a href={`mailto:${PROFILE.email}`}>{PROFILE.email}</a></span>
+			<span><span class="muted">PHONE</span> <a href={`tel:${PROFILE.phone.replace(/\s/g, '')}`}>{PROFILE.phone}</a></span>
+			<span><span class="muted">BASED</span> {PROFILE.location}</span>
+		</div>
+	</section>
+
+	<section class="container section">
+		<header class="section-head">
+			<h2>Professional summary</h2>
+			<span class="section-index"><span class="num">01</span> SUMMARY</span>
+		</header>
+		<p class="summary-body">
+			Senior marketing and communications professional with over 15 years of experience across Malaysia&rsquo;s publishing, media, government advisory, and education sectors. Brings together strategic marketing, digital campaigns, media relations, and crisis communications, with hands-on advisory work at federal ministerial press secretary level during high-profile public issues. Strong grounding in book publishing, including a portfolio of 1,200+ digital titles handled at PTS Media Group. Track record of leading project teams, managing campaign budgets, and improving ROI across digital and offline channels. Currently pursuing a Master in Publishing Studies at Universiti Malaya, and a regular trainer to government agencies, universities, and corporate clients on digital marketing, generative AI, and content strategy.
+		</p>
+	</section>
+
+	<section class="container section">
+		<header class="section-head">
+			<h2>Core competencies</h2>
+			<span class="section-index"><span class="num">02</span> SCOPE</span>
+		</header>
+		<ul class="list-pipe">
+			{competencies.map((c) => <li>· {c}</li>)}
+		</ul>
+	</section>
+
+	<section class="container section">
+		<header class="section-head">
+			<h2>Professional experience</h2>
+			<span class="section-index"><span class="num">03</span> {experience.length} ROLES</span>
+		</header>
+		<div class="rows">
+			{experience.map((e, i) => (
+				<article class="row">
+					<span class="row-index">{String(i + 1).padStart(2, '0')}</span>
+					<div class="row-body">
+						<h3>{e.role}</h3>
+						<div class="meta">
+							<span>{e.org}</span>
+							<span>{e.period}</span>
+							{e.type && <span>{e.type}</span>}
+						</div>
+						{e.summary && <p class="row-summary">{e.summary}</p>}
+						<ul>
+							{e.bullets.map((b) => <li>{b}</li>)}
+						</ul>
+						{e.keyAchievement && (
+							<p class="key-ach">
+								<span class="label label-accent">Key achievement</span>
+								<br />
+								{e.keyAchievement}
+							</p>
+						)}
+					</div>
+					<div class="row-side"></div>
+				</article>
+			))}
+		</div>
+	</section>
+
+	<section class="container section">
+		<header class="section-head">
+			<h2>Training & workshops delivered</h2>
+			<span class="section-index"><span class="num">04</span> ENGAGEMENTS</span>
+		</header>
+		<div class="rows">
+			{workshops.map((w, i) => (
+				<article class="row">
+					<span class="row-index">{String(i + 1).padStart(2, '0')}</span>
+					<div class="row-body">
+						<h3>{w.topic}</h3>
+						<ul class="client-list">
+							{w.clients.map((c) => (
+								<li>
+									<span class="client-name">{c.name}</span>
+									<span class="client-date">{c.date}</span>
+								</li>
+							))}
+						</ul>
+					</div>
+					<div class="row-side"></div>
+				</article>
+			))}
+		</div>
+	</section>
+
+	<section class="container section">
+		<header class="section-head">
+			<h2>Publications & speaking</h2>
+			<span class="section-index"><span class="num">05</span> RECORD</span>
+		</header>
+		<ul class="record-list">
+			{publications.map((p) => (
+				<li>
+					<span class="label">{p.role}</span>
+					<span class="record-title">{p.title}</span>
+					<span class="record-meta">{p.publisher} · {p.year}</span>
+				</li>
+			))}
+			{speaking.map((s) => (
+				<li>
+					<span class="label">{s.role}</span>
+					<span class="record-title">{s.title}</span>
+					<span class="record-meta">{s.venue}, {s.location} · {s.year}</span>
+				</li>
+			))}
+		</ul>
+	</section>
+
+	<section class="container section">
+		<header class="section-head">
+			<h2>Education</h2>
+			<span class="section-index"><span class="num">06</span> CREDENTIALS</span>
+		</header>
+		<div class="rows">
+			{education.map((e, i) => (
+				<article class="row">
+					<span class="row-index">{String(i + 1).padStart(2, '0')}</span>
+					<div class="row-body">
+						<h3>{e.title}</h3>
+						<div class="meta">
+							<span>{e.org}</span>
+							<span>{e.period}</span>
+							{e.note && <span>{e.note}</span>}
+						</div>
+					</div>
+					<div class="row-side"></div>
+				</article>
+			))}
+		</div>
+	</section>
+
+	<section class="container section">
+		<header class="section-head">
+			<h2>Professional certifications</h2>
+			<span class="section-index"><span class="num">07</span> CERT</span>
+		</header>
+		<div class="rows">
+			{certifications.map((c, i) => (
+				<article class="row">
+					<span class="row-index">{String(i + 1).padStart(2, '0')}</span>
+					<div class="row-body">
+						<h3>{c.title}</h3>
+						<div class="meta">
+							<span>{c.org}</span>
+							<span>{c.period}</span>
+						</div>
+						{c.note && <p>{c.note}</p>}
+					</div>
+					<div class="row-side"></div>
+				</article>
+			))}
+		</div>
+	</section>
+
+	<section class="container section">
+		<header class="section-head">
+			<h2>Technical proficiencies</h2>
+			<span class="section-index"><span class="num">08</span> TOOLS</span>
+		</header>
+		<div class="prof-grid">
+			<div class="prof-block">
+				<p class="label">Productivity</p>
+				<ul class="list-pipe">{proficiencies.productivity.map((t) => <li>· {t}</li>)}</ul>
+			</div>
+			<div class="prof-block">
+				<p class="label">Design & publishing</p>
+				<ul class="list-pipe">{proficiencies.design.map((t) => <li>· {t}</li>)}</ul>
+			</div>
+			<div class="prof-block">
+				<p class="label">Digital & web</p>
+				<ul class="list-pipe">{proficiencies.digital.map((t) => <li>· {t}</li>)}</ul>
+			</div>
+		</div>
+	</section>
+
+	<section class="container section">
+		<header class="section-head">
+			<h2>Languages</h2>
+			<span class="section-index"><span class="num">09</span> LANG</span>
+		</header>
+		<ul class="lang-grid">
+			{languages.map((l) => (
+				<li>
+					<span class="lang-name">{l.name}</span>
+					<span class="lang-score">Spoken {l.spoken}/10 · Written {l.written}/10</span>
+				</li>
+			))}
+		</ul>
+	</section>
+</BaseLayout>
+
+<style>
+	.hero-top {
+		display: flex;
+		justify-content: space-between;
+		font-family: var(--font-mono);
+		font-size: var(--text-xs);
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--ink-500);
+		margin-bottom: 2rem;
+	}
+	.cv-summary { max-width: 56ch; }
+	.cv-meta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem 2rem;
+		font-family: var(--font-mono);
+		font-size: var(--text-xs);
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--ink-700);
+		margin-top: 1.5rem;
+		padding-top: 1rem;
+		border-top: 1px solid var(--rule);
+	}
+	.cv-meta .muted { color: var(--ink-300); margin-right: 0.4em; }
+	.cv-meta a { color: var(--ink-700); }
+	.cv-meta a:hover { color: var(--accent); }
+
+	.summary-body {
+		font-size: var(--text-md);
+		color: var(--ink-700);
+		line-height: 1.7;
+		max-width: 70ch;
+	}
+
+	.row-summary { color: var(--ink-700); margin-bottom: 0.5rem; font-style: italic; }
+	.key-ach {
+		margin-top: 0.85rem;
+		padding: 0.75rem;
+		background: var(--accent-tint);
+		border-left: 2px solid var(--accent);
+		font-size: var(--text-sm);
+		color: var(--ink-900);
+		max-width: 70ch;
+	}
+	.key-ach .label-accent { color: var(--accent-deep); }
+
+	.client-list {
+		list-style: none;
+		padding: 0;
+		margin: 0.4rem 0 0;
+	}
+	.client-list li {
+		display: flex;
+		justify-content: space-between;
+		gap: 1rem;
+		padding: 0.45rem 0;
+		border-bottom: 1px solid var(--rule);
+		font-size: var(--text-sm);
+		flex-wrap: wrap;
+	}
+	.client-list li:last-child { border-bottom: 0; }
+	.client-name { color: var(--ink-900); }
+	.client-date {
+		font-family: var(--font-mono);
+		font-size: var(--text-xs);
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--ink-500);
+		white-space: nowrap;
+	}
+
+	.record-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		border-top: 1px solid var(--ink-900);
+	}
+	.record-list li {
+		display: grid;
+		grid-template-columns: 7rem 1fr auto;
+		gap: 1rem;
+		align-items: baseline;
+		padding: 1rem 0;
+		border-bottom: 1px solid var(--rule);
+	}
+	.record-list .label { color: var(--accent); }
+	.record-title { color: var(--ink-900); font-weight: 500; }
+	.record-meta {
+		font-family: var(--font-mono);
+		font-size: var(--text-xs);
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--ink-500);
+		text-align: right;
+	}
+	@media (max-width: 720px) {
+		.record-list li { grid-template-columns: 1fr; gap: 0.3rem; }
+		.record-meta { text-align: left; }
+	}
+
+	.prof-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.5rem;
+	}
+	@media (max-width: 820px) {
+		.prof-grid { grid-template-columns: 1fr; }
+	}
+	.prof-block .label { margin-bottom: 0.5rem; }
+	.prof-block .list-pipe { gap: 0.3rem 1rem; }
+
+	.lang-grid {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 0;
+		border-top: 1px solid var(--ink-900);
+	}
+	.lang-grid li {
+		padding: 1rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		gap: 1rem;
+		border-bottom: 1px solid var(--rule);
+		flex-wrap: wrap;
+	}
+	.lang-grid li:nth-child(odd) { border-right: 1px solid var(--rule); }
+	.lang-name { font-size: var(--text-md); color: var(--ink-900); }
+	.lang-score {
+		font-family: var(--font-mono);
+		font-size: var(--text-xs);
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--ink-500);
+	}
+	@media (max-width: 720px) {
+		.lang-grid { grid-template-columns: 1fr; }
+		.lang-grid li:nth-child(odd) { border-right: 0; }
+	}
+</style>

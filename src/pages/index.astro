@@ -1,0 +1,221 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_TITLE, SITE_NAME, SITE_TAGLINE, SITE_DESCRIPTION, STATS, PROFILE } from '../consts';
+import { projects } from '../data/projects';
+import { experience, workshops } from '../data/experience';
+
+const services = [
+	{
+		index: 'A',
+		title: 'Advisory',
+		body: 'Strategic comms counsel for federal-level, corporate, and publishing stakeholders. Crisis comms, media positioning, reputation management.',
+	},
+	{
+		index: 'B',
+		title: 'Training',
+		body: 'Workshops on generative AI in marketing, social media, content strategy, SEO, and digital publishing. Delivered to gov agencies, universities, and corporates.',
+	},
+	{
+		index: 'C',
+		title: 'Side projects',
+		body: 'Indie tools and bots built for personal use. Currently shipping osaji, a Telegram calorie tracker. Open to small collaborations.',
+	},
+];
+
+const trainedFor = [
+	'IPPTAR',
+	'INKOP',
+	'UiTM',
+	'IIUM',
+	'UNiSEL',
+	'TLDM',
+	'Jabatan Perpaduan Negara',
+	'Kementerian Kesihatan Malaysia',
+];
+
+const recentRoles = experience.slice(0, 3);
+const workshopCount = workshops.reduce((acc, w) => acc + w.clients.length, 0);
+---
+
+<BaseLayout title={`${SITE_NAME} · ${SITE_TITLE}`} description={SITE_DESCRIPTION}>
+	<section class="hero container">
+		<div class="hero-top">
+			<span class="section-index"><span class="num">01</span> OVERVIEW</span>
+			<span class="hero-loc">{PROFILE.location} · MY</span>
+		</div>
+		<h1>{SITE_NAME}</h1>
+		<p class="lede hero-tag">{SITE_TAGLINE}</p>
+		<div class="cluster hero-cta">
+			<a class="btn btn-primary" href="/contact/">Get in touch</a>
+			<a class="btn" href="/cv/">View CV</a>
+		</div>
+	</section>
+
+	<section class="container">
+		<div class="stat-grid">
+			{STATS.map((s) => (
+				<div class="stat">
+					<span class="stat-value">{s.value}</span>
+					<span class="stat-label">{s.label}</span>
+				</div>
+			))}
+		</div>
+	</section>
+
+	<section class="container section">
+		<header class="section-head">
+			<h2>What I do</h2>
+			<span class="section-index"><span class="num">02</span> SERVICES</span>
+		</header>
+		<div class="grid-3 services">
+			{services.map((s) => (
+				<article class="panel service-card">
+					<span class="label label-accent">{s.index}</span>
+					<h3>{s.title}</h3>
+					<p>{s.body}</p>
+				</article>
+			))}
+		</div>
+	</section>
+
+	<section class="container section">
+		<header class="section-head">
+			<h2>Recent work</h2>
+			<a class="section-index" href="/cv/"><span class="num">03</span> SEE FULL CV →</a>
+		</header>
+		<div class="rows">
+			{recentRoles.map((r, i) => (
+				<article class="row">
+					<span class="row-index">[{String(i + 1).padStart(2, '0')}]</span>
+					<div class="row-body">
+						<h3>{r.role}</h3>
+						<div class="meta">
+							<span>{r.org}</span>
+							<span>{r.period}</span>
+							{r.type && <span>{r.type}</span>}
+						</div>
+						{r.summary && <p>{r.summary}</p>}
+					</div>
+					<div class="row-side"></div>
+				</article>
+			))}
+		</div>
+	</section>
+
+	<section class="container section">
+		<header class="section-head">
+			<h2>Side projects</h2>
+			<a class="section-index" href="/projects/"><span class="num">04</span> ALL PROJECTS →</a>
+		</header>
+		<div class="rows">
+			{projects.map((p) => (
+				<article class="row">
+					<span class="row-index">[{p.id}]</span>
+					<div class="row-body">
+						<h3>{p.name}</h3>
+						<div class="meta">
+							<span>{p.tagline}</span>
+							{p.version && <span>{p.version}</span>}
+							<span>{p.year}</span>
+						</div>
+						<p>{p.description}</p>
+					</div>
+					<div class="row-side">
+						<span class={`pill ${p.status === 'LIVE' ? 'pill-live' : p.status === 'IN DEV' ? 'pill-dev' : 'pill-static'}`}>{p.status}</span>
+					</div>
+				</article>
+			))}
+		</div>
+	</section>
+
+	<section class="container section">
+		<header class="section-head">
+			<h2>Trained for</h2>
+			<span class="section-index"><span class="num">05</span> {workshopCount} ENGAGEMENTS</span>
+		</header>
+		<ul class="trained-list">
+			{trainedFor.map((org) => <li>{org}</li>)}
+		</ul>
+	</section>
+
+	<section class="container section-tight">
+		<div class="cta-panel">
+			<div>
+				<p class="label label-accent">06 / GET IN TOUCH</p>
+				<h2>Need an operator on your bench?</h2>
+				<p class="lede">Advisory, training, or just to compare notes on generative AI in comms.</p>
+			</div>
+			<a class="btn btn-primary" href="/contact/">Open contact →</a>
+		</div>
+	</section>
+</BaseLayout>
+
+<style>
+	.hero {
+		padding-top: clamp(3rem, 7vw, 6rem);
+		padding-bottom: clamp(2rem, 5vw, 4rem);
+	}
+	.hero-top {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		font-family: var(--font-mono);
+		font-size: var(--text-xs);
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--ink-500);
+		margin-bottom: 2rem;
+	}
+	.hero-tag { max-width: 38ch; font-size: var(--text-md); }
+	.hero-cta { margin-top: 1.75rem; }
+
+	.services .panel {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		min-height: 12rem;
+	}
+	.services h3 { margin: 0.5rem 0 0.5rem; font-size: var(--text-lg); }
+	.services p { color: var(--ink-700); font-size: var(--text-sm); line-height: 1.6; }
+
+	.trained-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		border-top: 1px solid var(--ink-900);
+		border-left: 1px solid var(--ink-900);
+	}
+	.trained-list li {
+		font-family: var(--font-mono);
+		font-size: var(--text-xs);
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--ink-900);
+		padding: 1rem 0.85rem;
+		border-right: 1px solid var(--ink-900);
+		border-bottom: 1px solid var(--ink-900);
+		background: var(--surface);
+	}
+	@media (max-width: 820px) {
+		.trained-list { grid-template-columns: repeat(2, 1fr); }
+	}
+
+	.cta-panel {
+		background: var(--ink-900);
+		color: var(--surface);
+		padding: clamp(2rem, 4vw, 3rem);
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 2rem;
+	}
+	.cta-panel h2 { color: var(--surface); margin: 0.5rem 0 0.5rem; }
+	.cta-panel .lede { color: var(--ink-300); max-width: 42ch; margin: 0; }
+	.cta-panel .label-accent { color: var(--accent); }
+	.cta-panel .btn-primary { white-space: nowrap; }
+	@media (max-width: 820px) {
+		.cta-panel { flex-direction: column; align-items: flex-start; }
+	}
+</style>
