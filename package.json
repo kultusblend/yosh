@@ -10,6 +10,7 @@
     "build": "astro build",
     "build:prod": "SITE_URL=https://yosh.my astro build",
     "preview": "astro preview",
+    "gen:og": "node scripts/gen-og.mjs",
     "deploy": "npm run build:prod && CLOUDFLARE_ACCOUNT_ID=d52d9daab552d420a5784ccd36b52435 npx wrangler pages deploy dist --project-name yosh --branch main --commit-dirty=true --commit-message=\"manual deploy from yosh package script\"",
     "astro": "astro"
   },
