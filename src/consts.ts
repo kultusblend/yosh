@@ -20,12 +20,13 @@ export const PROFILE = {
 	jobTitle: 'Senior Marketing & Corporate Communications Consultant',
 };
 
-// TODO: confirm + populate social handles with Azree
+// Social handles. All use the same @azreehanifiah identifier.
+// Remove or update any URL that does not point to a real account.
 export const SOCIAL = {
 	email: 'azreehanifiah@gmail.com',
-	linkedin: '',
-	twitter: '',
-	github: '',
+	linkedin: 'https://www.linkedin.com/in/azreehanifiah',
+	twitter: 'https://x.com/azreehanifiah',
+	github: 'https://github.com/azreehanifiah',
 	instagram: '',
 	threads: '',
 };
