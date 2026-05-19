@@ -2,8 +2,12 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE_TITLE, PROFILE, SOCIAL } from '../consts';
 
-// TODO: replace with real Formspree (or Web3Forms) endpoint
-const FORM_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
+// Web3Forms backend: free, EU-routed, drop-in HTML form action.
+// Sign up at https://web3forms.com to get your access key (paste below).
+// The access key is client-exposed by design — it is a routing ID, not a secret.
+// TODO: replace YOUR_WEB3FORMS_ACCESS_KEY with the real key from web3forms.com dashboard.
+const WEB3FORMS_ACCESS_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY';
+const FORM_ENDPOINT = 'https://api.web3forms.com/submit';
 
 const socialEntries = Object.entries(SOCIAL).filter(
 	([key, v]) => key !== 'email' && v,
@@ -68,6 +72,12 @@ const socialEntries = Object.entries(SOCIAL).filter(
 					<span class="section-index"><span class="num">02</span> FORM</span>
 				</header>
 				<form class="contact-form" action={FORM_ENDPOINT} method="POST">
+					<input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
+					<input type="hidden" name="subject" value="New brief from yosh.my" />
+					<input type="hidden" name="from_name" value="yosh.my contact form" />
+					{/* Honeypot — must remain empty to pass spam check */}
+					<input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" />
+
 					<div class="field">
 						<label for="name">Name</label>
 						<input id="name" name="name" type="text" required autocomplete="name" />
@@ -96,7 +106,7 @@ const socialEntries = Object.entries(SOCIAL).filter(
 					</div>
 					<button type="submit" class="btn btn-primary">Send brief →</button>
 					<p class="form-note">
-						Form powered by Formspree. By submitting, you agree to be contacted at the email you provided.
+						Form powered by Web3Forms. By submitting, you agree to be contacted at the email you provided.
 					</p>
 				</form>
 			</div>
