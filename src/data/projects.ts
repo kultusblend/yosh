@@ -19,20 +19,19 @@ export const projects: Project[] = [
 	{
 		id: '01',
 		name: 'osaji',
-		tagline: 'Telegram-based calorie & macro tracker bot',
+		tagline: 'AI calorie tracker yang faham makanan Malaysia',
 		status: 'LIVE',
-		statusNote: 'ongoing development',
+		statusNote: 'Telegram live, web dashboard in dev',
 		year: '2025',
-		version: 'v0.x',
-		stack: ['Telegram Bot API', 'Gemini Vision', 'TypeScript'],
+		version: 'beta',
+		stack: ['Telegram Bot API', 'AI Vision', 'Local food DB (2,700+)'],
 		description:
-			'Personal-use bot untuk track kalori dan macros melalui Telegram. Snap gambar makanan, bot reply estimate. Vision model handle classification + portion estimate, bot tu jaga conversation state dan daily log.',
+			'Penjejak kalori yang faham nasi lemak, bukan setakat dada ayam. Snap gambar makanan Malaysia, AI Vision identify lepas tu return kalori, protein, karbo, lemak automatik, ditapis melalui database makanan tempatan 2,700+ item.',
 		bullets: [
 			'Snap-and-log workflow: zero typing untuk entry biasa',
-			'Vision-first: tak perlu cari benda dalam database makanan',
-			'Designed for solo user, no auth / multi-tenant overhead',
+			'Vision-first: tak perlu cari item dalam database makanan global yang missing local food',
+			'Local-first: database tuned khusus untuk masakan Malaysia',
 		],
-		// TODO: confirm bot handle + add live link
-		link: { label: 'Try @osaji_bot', href: '#' },
+		link: { label: 'Visit osaji.app', href: 'https://osaji.app/' },
 	},
 ];
