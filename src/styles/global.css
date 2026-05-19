@@ -1,29 +1,30 @@
 /* =====================================================================
-   yosh.my Design System
-   Direction: Marketing Lab (operator console, light mode)
-   Sharp sans + mono, hairline grids, single laser accent.
-   No box shadow. Borders do the structural work.
+   yosh.my Design System v2
+   Direction: Editorial Brutalism / The Dossier
+   Inria Serif for authority, IBM Plex Mono for data.
+   Hairline editorial grid, burnished brass accent used sparingly.
+   Borders + insets do the structural work. No drop shadows.
    ===================================================================== */
 
 :root {
 	/* ----- Palette ----- */
-	--bg:            #fafaf9;
-	--surface:       #ffffff;
-	--surface-2:    #f4f3ef;
-	--ink-900:       #0a0a09;
-	--ink-700:       #2a2826;
-	--ink-500:       #6b6864;
-	--ink-300:       #b8b3ad;
-	--rule:          #e5e2dc;
-	--rule-strong:   #d4cfc7;
-	--accent:        #e63946;
-	--accent-deep:   #b8222e;
-	--accent-tint:   #fdecee;
-	--ok:            #166534;
-	--warn:          #a16207;
+	--bg:            #f7f4ec;
+	--surface:       #fcfaf2;
+	--surface-2:     #efeadb;
+	--ink-900:       #0c0b08;
+	--ink-700:       #2a2620;
+	--ink-500:       #6b6457;
+	--ink-300:       #b8b09f;
+	--rule:          #d8d1bf;
+	--rule-strong:   #c0b8a3;
+	--accent:        #a47f3c;
+	--accent-deep:   #6f5320;
+	--accent-tint:   #f0e6cf;
+	--ok:            #4a5d23;
+	--warn:          #8a5a1c;
 
 	/* ----- Fonts ----- */
-	--font-sans: 'IBM Plex Sans Variable', 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, sans-serif;
+	--font-serif: 'Inria Serif', 'Source Serif 4', Georgia, 'Times New Roman', serif;
 	--font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 
 	/* ----- Scale (modular 1.25) ----- */
@@ -73,10 +74,9 @@ body {
 	margin: 0;
 	background: var(--bg);
 	color: var(--ink-700);
-	font-family: var(--font-sans);
+	font-family: var(--font-serif);
 	font-size: var(--text-base);
 	line-height: var(--leading-body);
-	font-feature-settings: 'ss01', 'ss02', 'cv01', 'cv02';
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-rendering: optimizeLegibility;
@@ -118,27 +118,30 @@ a:hover, a:focus-visible { color: var(--accent); }
    ===================================================================== */
 
 h1, h2, h3, h4, h5, h6 {
-	font-family: var(--font-sans);
+	font-family: var(--font-serif);
 	color: var(--ink-900);
-	font-weight: 600;
-	letter-spacing: -0.015em;
+	font-weight: 700;
+	letter-spacing: -0.01em;
 	line-height: var(--leading-tight);
 	margin: 0 0 0.5em;
 }
 
-h1 { font-size: var(--text-4xl); font-weight: 700; letter-spacing: -0.025em; }
-h2 { font-size: var(--text-2xl); }
-h3 { font-size: var(--text-lg); }
-h4 { font-size: var(--text-md); }
+h1 { font-size: var(--text-4xl); font-weight: 700; letter-spacing: -0.02em; }
+h2 { font-size: var(--text-2xl); font-weight: 700; }
+h3 { font-size: var(--text-lg); font-weight: 600; }
+h4 { font-size: var(--text-md); font-weight: 600; }
 
 p { margin: 0 0 1em; max-width: var(--max-prose); }
 p:last-child { margin-bottom: 0; }
 
-strong, b { color: var(--ink-900); font-weight: 600; }
+strong, b { color: var(--ink-900); font-weight: 700; }
+em, i { font-style: italic; }
 
 .lede {
+	font-family: var(--font-serif);
 	font-size: var(--text-md);
 	color: var(--ink-700);
+	font-style: italic;
 	max-width: 56ch;
 	line-height: 1.5;
 }
@@ -200,11 +203,21 @@ strong, b { color: var(--ink-900); font-weight: 600; }
 
 .rule       { border: 0; border-top: var(--bw) solid var(--rule); margin: 0; }
 .rule-thick { border: 0; border-top: var(--bw-strong) solid var(--ink-900); margin: 0; }
+/* Double-hairline rule for editorial dividers (under header etc) */
+.rule-double {
+	border: 0;
+	height: 5px;
+	border-top: var(--bw) solid var(--ink-900);
+	border-bottom: var(--bw) solid var(--ink-900);
+	margin: 0;
+}
 
 /* =====================================================================
    Buttons
    ===================================================================== */
 
+/* Stamped/debossed buttons. Hover indents the surface with inset shadow,
+   mimicking pressing a stamp into thick paper. */
 .btn {
 	display: inline-flex;
 	align-items: center;
@@ -219,21 +232,32 @@ strong, b { color: var(--ink-900); font-weight: 600; }
 	color: var(--ink-900);
 	border: var(--bw) solid var(--ink-900);
 	cursor: pointer;
-	transition: background var(--transition), color var(--transition), border-color var(--transition);
+	box-shadow: inset 0 0 0 0 rgba(12, 11, 8, 0);
+	transition:
+		box-shadow 140ms ease-out,
+		background 140ms ease-out,
+		color 140ms ease-out,
+		transform 100ms ease-out;
 }
 .btn:hover, .btn:focus-visible {
-	background: var(--ink-900);
-	color: var(--surface);
+	box-shadow: inset 0 2px 6px rgba(12, 11, 8, 0.18);
+	background: var(--surface-2);
+	color: var(--ink-900);
+	transform: translateY(1px);
+}
+.btn:active {
+	box-shadow: inset 0 3px 8px rgba(12, 11, 8, 0.28);
+	transform: translateY(1px);
 }
 .btn-primary {
 	background: var(--accent);
 	color: var(--surface);
-	border-color: var(--accent);
+	border-color: var(--accent-deep);
 }
 .btn-primary:hover, .btn-primary:focus-visible {
-	background: var(--accent-deep);
-	border-color: var(--accent-deep);
+	background: var(--accent);
 	color: var(--surface);
+	box-shadow: inset 0 2px 6px rgba(58, 38, 8, 0.45);
 }
 .btn-ghost {
 	background: transparent;
@@ -243,7 +267,8 @@ strong, b { color: var(--ink-900); font-weight: 600; }
 .btn-ghost:hover, .btn-ghost:focus-visible {
 	border-color: var(--ink-900);
 	color: var(--ink-900);
-	background: transparent;
+	background: var(--surface-2);
+	box-shadow: inset 0 2px 6px rgba(12, 11, 8, 0.12);
 }
 
 /* =====================================================================
@@ -276,29 +301,51 @@ strong, b { color: var(--ink-900); font-weight: 600; }
 .pill-static { color: var(--ink-500); border-color: var(--ink-300); }
 
 /* =====================================================================
-   Stat callouts (hero numbers)
+   Stat callouts — spec-table format
+   Top: mono column header strip (METRIC // VALUE // CONTEXT label band)
+   Body: serif value + mono caption inside rigid bordered cells
    ===================================================================== */
 
-.stat-grid {
+.spec-strip {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	border-top: var(--bw) solid var(--ink-900);
 	border-bottom: var(--bw) solid var(--ink-900);
+	background: var(--ink-900);
+	color: var(--surface);
+}
+.spec-strip .spec-col {
+	padding: 0.5rem 1rem;
+	font-family: var(--font-mono);
+	font-size: var(--text-xs);
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	border-right: var(--bw) solid var(--ink-700);
+	color: var(--ink-300);
+}
+.spec-strip .spec-col:last-child { border-right: 0; }
+.spec-strip .spec-col .spec-num { color: var(--accent); margin-right: 0.5em; }
+
+.stat-grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	border-bottom: var(--bw) solid var(--ink-900);
 }
 .stat-grid .stat {
-	padding: 1.25rem 1rem;
+	padding: 1.5rem 1rem;
 	border-right: var(--bw) solid var(--rule);
+	background: var(--surface);
 }
 .stat-grid .stat:last-child { border-right: 0; }
 .stat .stat-value {
 	display: block;
-	font-family: var(--font-sans);
+	font-family: var(--font-serif);
 	font-weight: 700;
 	font-size: var(--text-2xl);
 	color: var(--ink-900);
 	letter-spacing: -0.02em;
 	line-height: 1;
-	margin-bottom: 0.5rem;
+	margin-bottom: 0.65rem;
 }
 .stat .stat-label {
 	font-family: var(--font-mono);
@@ -311,10 +358,15 @@ strong, b { color: var(--ink-900); font-weight: 600; }
 }
 
 @media (max-width: 720px) {
-	.stat-grid {
+	.spec-strip, .stat-grid {
 		grid-template-columns: repeat(2, 1fr);
 	}
+	.spec-strip .spec-col:nth-child(2),
 	.stat-grid .stat:nth-child(2) { border-right: 0; }
+	.spec-strip .spec-col:nth-child(1),
+	.spec-strip .spec-col:nth-child(2) {
+		border-bottom: var(--bw) solid var(--ink-700);
+	}
 	.stat-grid .stat:nth-child(1),
 	.stat-grid .stat:nth-child(2) {
 		border-bottom: var(--bw) solid var(--rule);
@@ -324,10 +376,10 @@ strong, b { color: var(--ink-900); font-weight: 600; }
 .stat-hero {
 	font-size: var(--text-stat);
 	font-weight: 700;
-	letter-spacing: -0.04em;
+	letter-spacing: -0.03em;
 	line-height: 0.9;
 	color: var(--ink-900);
-	font-family: var(--font-sans);
+	font-family: var(--font-serif);
 }
 
 /* =====================================================================
@@ -443,7 +495,7 @@ label {
 input, textarea, select {
 	width: 100%;
 	padding: 0.65rem 0.75rem;
-	font-family: var(--font-sans);
+	font-family: var(--font-serif);
 	font-size: var(--text-base);
 	color: var(--ink-900);
 	background: var(--surface);

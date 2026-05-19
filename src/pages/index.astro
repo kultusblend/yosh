@@ -52,6 +52,12 @@ const workshopCount = workshops.reduce((acc, w) => acc + w.clients.length, 0);
 	</section>
 
 	<section class="container">
+		<div class="spec-strip" aria-hidden="true">
+			<span class="spec-col"><span class="spec-num">A</span>EXPERIENCE</span>
+			<span class="spec-col"><span class="spec-num">B</span>PORTFOLIO</span>
+			<span class="spec-col"><span class="spec-num">C</span>REACH</span>
+			<span class="spec-col"><span class="spec-num">D</span>OUTCOMES</span>
+		</div>
 		<div class="stat-grid">
 			{STATS.map((s) => (
 				<div class="stat">

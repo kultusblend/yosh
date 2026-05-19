@@ -135,12 +135,26 @@ const isActive = (href: string) =>
 </script>
 
 <style>
+	/* Double-hairline editorial divider beneath the sticky header.
+	   Two 1px lines separated by a 3px breath, dossier / book-cover feel.
+	   Pseudo-element drawn directly below header sits in normal flow,
+	   so the layout below shifts cleanly without overlap. */
 	.site-header {
 		background: var(--bg);
-		border-bottom: 1px solid var(--ink-900);
+		border-bottom: var(--bw) solid var(--ink-900);
 		position: sticky;
 		top: 0;
 		z-index: 50;
+	}
+	.site-header::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 100%;
+		margin-top: 3px;
+		height: var(--bw);
+		background: var(--ink-900);
 	}
 	.header-inner {
 		display: grid;
@@ -153,17 +167,19 @@ const isActive = (href: string) =>
 	.brand {
 		display: inline-flex;
 		align-items: baseline;
-		gap: 0.5rem;
+		gap: 0.45rem;
 		color: var(--ink-900);
-		font-family: var(--font-mono);
 	}
 	.brand-prefix {
 		color: var(--accent);
+		font-family: var(--font-mono);
 		font-weight: 500;
 	}
 	.brand-name {
-		font-weight: 500;
-		font-size: var(--text-base);
+		font-family: var(--font-serif);
+		font-style: italic;
+		font-weight: 700;
+		font-size: var(--text-lg);
 		letter-spacing: -0.01em;
 	}
 
