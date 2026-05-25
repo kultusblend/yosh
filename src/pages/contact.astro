@@ -3,10 +3,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE_TITLE, PROFILE, SOCIAL } from '../consts';
 
 // Web3Forms backend: free, EU-routed, drop-in HTML form action.
-// Sign up at https://web3forms.com to get your access key (paste below).
-// The access key is client-exposed by design — it is a routing ID, not a secret.
-// TODO: replace YOUR_WEB3FORMS_ACCESS_KEY with the real key from web3forms.com dashboard.
-const WEB3FORMS_ACCESS_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY';
+// Access key is client-exposed by design (routing ID, not a secret).
+// Manage at https://web3forms.com (account: azreehanifiah@gmail.com).
+const WEB3FORMS_ACCESS_KEY = '77cd9568-f684-4caa-9ed9-d3135e3991ed';
 const FORM_ENDPOINT = 'https://api.web3forms.com/submit';
 
 const socialEntries = Object.entries(SOCIAL).filter(
