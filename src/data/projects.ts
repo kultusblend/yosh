@@ -18,6 +18,25 @@ export interface Project {
 export const projects: Project[] = [
 	{
 		id: '01',
+		name: 'univ.my',
+		tagline: 'Curated marketplace pembelajaran BM-first dengan payment lokal',
+		status: 'LIVE',
+		statusNote: 'invite-only, onboarding pencipta konten Malaysia',
+		year: '2025',
+		version: 'v1',
+		stack: ['Cloudflare stack', 'Chip in Asia (payment)', 'Bunny Stream', 'WhatsApp OTP'],
+		description:
+			'Marketplace untuk webinar, course, dan ebook dari pakar Malaysia. Pembeli bayar guna FPX, kad kredit, atau e-wallet tempatan (TNG, Boost, GrabPay) tanpa gimik luar negara. Pencipta konten dapat subdomain peribadi (cthnya nama.univ.my), sales page builder, video host professional, dan komisen 15% telus dengan payout ke akaun bank Malaysia.',
+		bullets: [
+			'BM-first interface dan workflow, tak terpaksa adaptasi pasaran global',
+			'Komisen 15% sahaja, payout terus ke akaun bank MY',
+			'Curated invite-only: konten dipilih, bukan bazar terbuka',
+			'Founder + first seller: dogfooding produk sendiri',
+		],
+		link: { label: 'Visit univ.my', href: 'https://univ.my/' },
+	},
+	{
+		id: '02',
 		name: 'osaji',
 		tagline: 'AI calorie tracker yang faham makanan Malaysia',
 		status: 'LIVE',
