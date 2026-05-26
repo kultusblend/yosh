@@ -15,7 +15,7 @@ const body = `# yosh.my
 
 ## Optional
 
-- Author: Noor Azree bin Mohd Hanifiah
+- Author: Azree Hanifiah
 - Based in: Kajang, Selangor, Malaysia
 - Languages: Bahasa Melayu (10/10), English (8/10)
 `;
