@@ -15,15 +15,12 @@ export const PROFILE = {
 	handle: 'yosh',
 	location: 'Kajang, Selangor',
 	country: 'MY',
-	email: 'azreehanifiah@gmail.com',
-	phone: '+60 19-774 9201',
 	jobTitle: 'Senior Marketing & Corporate Communications Consultant',
 };
 
-// Social handles. All use the same @azreehanifiah identifier.
-// Remove or update any URL that does not point to a real account.
+// Public social handles only. Email + phone intentionally NOT exposed
+// on the site; inquiries route through the Web3Forms contact form.
 export const SOCIAL = {
-	email: 'azreehanifiah@gmail.com',
 	linkedin: 'https://www.linkedin.com/in/azreehanifiah',
 	twitter: 'https://x.com/azreehanifiah',
 	github: 'https://github.com/kultusblend',

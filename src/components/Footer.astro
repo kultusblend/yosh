@@ -4,7 +4,7 @@ const year = new Date().getFullYear();
 const lastBuild = new Date().toISOString().slice(0, 10);
 
 const socialEntries = Object.entries(SOCIAL).filter(
-	([, v]) => v && (v.startsWith('http') || v.includes('@')),
+	([, v]) => v && v.startsWith('http'),
 );
 ---
 
@@ -27,11 +27,11 @@ const socialEntries = Object.entries(SOCIAL).filter(
 				</ul>
 			</div>
 			<div class="col">
-				<p class="label">Contact</p>
+				<p class="label">Reach</p>
 				<ul class="list-clean">
-					<li><a href={`mailto:${PROFILE.email}`}>{PROFILE.email}</a></li>
+					<li><a href="/contact/">Send a brief</a></li>
 					{socialEntries.map(([key, val]) => (
-						<li><a href={val.startsWith('http') ? val : `https://${val}`}>{key}</a></li>
+						<li><a href={val}>{key}</a></li>
 					))}
 				</ul>
 			</div>
