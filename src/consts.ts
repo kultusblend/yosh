@@ -1,17 +1,17 @@
 // Global site metadata.
 
 export const SITE_TITLE = 'yosh.my';
-export const SITE_NAME = 'Noor Azree Hanifiah';
+export const SITE_NAME = 'Azree Hanifiah';
 export const SITE_TAGLINE =
 	'Senior marketing & corp comms operator. Federal-level advisory. Indie builder. AI-in-marketing trainer.';
 export const SITE_DESCRIPTION =
-	'Personal site Noor Azree Hanifiah. Senior marketing & corp comms consultant. 15 tahun pengalaman publishing, media, federal advisory, dan latihan generative AI.';
+	'Personal site Azree Hanifiah. Senior marketing & corp comms consultant. 15 tahun pengalaman publishing, media, federal advisory, dan latihan generative AI.';
 export const SITE_LANG = 'ms';
 export const SITE_LOCALE = 'ms_MY';
 
 export const PROFILE = {
 	fullName: 'Noor Azree bin Mohd Hanifiah',
-	shortName: 'Noor Azree Hanifiah',
+	shortName: 'Azree Hanifiah',
 	handle: 'yosh',
 	location: 'Kajang, Selangor',
 	country: 'MY',

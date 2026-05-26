@@ -49,7 +49,7 @@ const svg = `<?xml version="1.0" encoding="UTF-8"?>
 	</text>
 
 	<!-- Big serif name -->
-	<text x="80" y="320" font-family="${FONT_SERIF}" font-size="92" font-weight="700" fill="${C.ink900}" letter-spacing="-1.5">Noor Azree Hanifiah</text>
+	<text x="80" y="320" font-family="${FONT_SERIF}" font-size="92" font-weight="700" fill="${C.ink900}" letter-spacing="-1.5">Azree Hanifiah</text>
 
 	<!-- Italic tagline (two lines) -->
 	<text x="80" y="395" font-family="${FONT_SERIF}" font-size="32" font-style="italic" fill="${C.ink700}">Senior marketing &amp; corp comms operator.</text>

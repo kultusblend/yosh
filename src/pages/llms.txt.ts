@@ -4,7 +4,7 @@ const SITE_URL = import.meta.env.SITE ?? 'https://yosh.my';
 
 const body = `# yosh.my
 
-> Personal site of Noor Azree Hanifiah. Senior marketing & corporate communications consultant. 15+ years across publishing, media, federal advisory, and education in Malaysia. Trainer on generative AI in marketing.
+> Personal site of Azree Hanifiah. Senior marketing & corporate communications consultant. 15+ years across publishing, media, federal advisory, and education in Malaysia. Trainer on generative AI in marketing.
 
 ## Pages
 
