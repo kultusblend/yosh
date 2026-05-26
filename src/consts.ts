@@ -26,7 +26,7 @@ export const SOCIAL = {
 	email: 'azreehanifiah@gmail.com',
 	linkedin: 'https://www.linkedin.com/in/azreehanifiah',
 	twitter: 'https://x.com/azreehanifiah',
-	github: 'https://github.com/azreehanifiah',
+	github: 'https://github.com/kultusblend',
 	instagram: '',
 	threads: '',
 };
