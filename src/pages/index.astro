@@ -114,23 +114,34 @@ const workshopCount = workshops.reduce((acc, w) => acc + w.clients.length, 0);
 			<a class="section-index" href="/projects/"><span class="num">04</span> ALL PROJECTS →</a>
 		</header>
 		<div class="rows">
-			{projects.map((p) => (
-				<article class="row">
-					<span class="row-index">[{p.id}]</span>
-					<div class="row-body">
-						<h3>{p.name}</h3>
-						<div class="meta">
-							<span>{p.tagline}</span>
-							{p.version && <span>{p.version}</span>}
-							<span>{p.year}</span>
+			{projects.map((p) => {
+				const hasLink = p.link && p.link.href && p.link.href !== '#';
+				return (
+					<article class={`row project-row ${hasLink ? 'is-linked' : ''}`}>
+						<span class="row-index">[{p.id}]</span>
+						<div class="row-body">
+							<h3>
+								{hasLink ? (
+									<a href={p.link.href} class="project-link" target="_blank" rel="noopener noreferrer">
+										{p.name}<span class="ext" aria-hidden="true"> ↗</span>
+									</a>
+								) : (
+									p.name
+								)}
+							</h3>
+							<div class="meta">
+								<span>{p.tagline}</span>
+								{p.version && <span>{p.version}</span>}
+								<span>{p.year}</span>
+							</div>
+							<p>{p.description}</p>
 						</div>
-						<p>{p.description}</p>
-					</div>
-					<div class="row-side">
-						<span class={`pill ${p.status === 'LIVE' ? 'pill-live' : p.status === 'IN DEV' ? 'pill-dev' : 'pill-static'}`}>{p.status}</span>
-					</div>
-				</article>
-			))}
+						<div class="row-side">
+							<span class={`pill ${p.status === 'LIVE' ? 'pill-live' : p.status === 'IN DEV' ? 'pill-dev' : 'pill-static'}`}>{p.status}</span>
+						</div>
+					</article>
+				);
+			})}
 		</div>
 	</section>
 
@@ -183,6 +194,49 @@ const workshopCount = workshops.reduce((acc, w) => acc + w.clients.length, 0);
 	}
 	.services h3 { margin: 0.5rem 0 0.5rem; font-size: var(--text-lg); }
 	.services p { color: var(--ink-700); font-size: var(--text-sm); line-height: 1.6; }
+
+	/* Clickable project rows: card-link pattern with stretched link.
+	   The anchor sits on the heading for screen-reader semantics; a
+	   ::after pseudo stretches the hit area over the whole article. */
+	.project-row.is-linked {
+		position: relative;
+		cursor: pointer;
+		transition: background var(--transition);
+	}
+	.project-row.is-linked:hover,
+	.project-row.is-linked:focus-within {
+		background: var(--accent-tint);
+	}
+	.project-link {
+		color: var(--ink-900);
+		text-decoration: none;
+		display: inline-flex;
+		align-items: baseline;
+		gap: 0.15em;
+	}
+	.project-link::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+	}
+	.project-link .ext {
+		color: var(--accent);
+		font-family: var(--font-mono);
+		font-size: 0.7em;
+		font-weight: 500;
+		transition: transform var(--transition);
+		display: inline-block;
+	}
+	.project-row.is-linked:hover .project-link,
+	.project-row.is-linked:focus-within .project-link {
+		color: var(--accent-deep);
+	}
+	.project-row.is-linked:hover .ext {
+		transform: translate(2px, -2px);
+	}
+	/* Keep the status pill above the stretched link so it stays visible
+	   (not clickable on its own; click anywhere in row goes to link) */
+	.project-row .row-side { position: relative; z-index: 1; pointer-events: none; }
 
 	.trained-list {
 		list-style: none;
