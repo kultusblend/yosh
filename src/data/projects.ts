@@ -37,6 +37,25 @@ export const projects: Project[] = [
 	},
 	{
 		id: '02',
+		name: 'tempa.my',
+		tagline: 'Managed static-site service untuk SME Malaysia',
+		status: 'LIVE',
+		statusNote: 'subscriptions open, pricing dari RM20/bulan',
+		year: '2025',
+		version: 'v1',
+		stack: ['Cloudflare Pages', 'Static SSG', 'No-code visual editor', 'Chip in Asia'],
+		description:
+			'Tempa migrate laman SME Malaysia dari WordPress, Wix, atau dari kosong ke static modern stack: laju, selamat, murah, no plugin baggage. Klien dapat editor visual drag-and-drop untuk edit kandungan sendiri tanpa coding, kami uruskan infrastructure. Pricing telus dari RM20/bulan, setup once RM50.',
+		bullets: [
+			'WordPress migration full included dalam yuran pemasangan',
+			'Editor visual no-code: klien edit teks, gambar, susunan tanpa programmer',
+			'Hosted on Cloudflare global edge, HTTPS automatik, no maintenance burden',
+			'3 tiers (Starter/Pro/Agency) dengan AI section generator pada Pro ke atas',
+		],
+		link: { label: 'Visit tempa.my', href: 'https://tempa.my/' },
+	},
+	{
+		id: '03',
 		name: 'osaji',
 		tagline: 'AI calorie tracker yang faham makanan Malaysia',
 		status: 'LIVE',
